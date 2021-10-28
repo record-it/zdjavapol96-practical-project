@@ -30,8 +30,6 @@ public class SwapiApp {
                                         int id = scanner.nextInt();
                                         scanner.nextLine();
                                         final Optional<Planet> op = planets.findById(id);
-//                                        op.ifPresent(planet ->
-//                                                System.out.println(planet));
                                         if (op.isPresent()){
                                             System.out.println(op.get());
                                         } else {
@@ -40,7 +38,6 @@ public class SwapiApp {
                                     } else {
                                         System.out.println("Błędnie wpisałeś liczbę!");
                                     }
-
                                 }).build(),
                         MenuItem.builder()
                                 .label("Wyjście")

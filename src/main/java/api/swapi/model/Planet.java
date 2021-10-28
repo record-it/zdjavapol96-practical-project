@@ -1,10 +1,12 @@
 package api.swapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties
 public class Planet {
     private String rotation_period;
     private List<String> residents;

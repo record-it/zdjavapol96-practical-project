@@ -29,7 +29,11 @@ public class PlanetRepository {
     public Optional<Planet> findById(int id){
         try {
             final HttpResponse<String> resp = ApiJsonStringLoader.get(new URI(URI_PLANET+"/"+id));
-            return Optional.of(mapper.readValue(resp.body(), Planet.class));
+            if(resp != null) {
+                return Optional.of(mapper.readValue(resp.body(), Planet.class));
+            } else {
+                return Optional.empty();
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

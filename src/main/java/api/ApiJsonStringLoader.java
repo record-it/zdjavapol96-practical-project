@@ -19,6 +19,10 @@ public class ApiJsonStringLoader {
                 .uri(uri)
                 .build();
         final HttpResponse<String> res = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return res;
+        if (res.statusCode() == 200) {
+            return res;
+        } else {
+            return null;
+        }
     }
 }
