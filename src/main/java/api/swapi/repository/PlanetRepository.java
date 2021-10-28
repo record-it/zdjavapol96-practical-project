@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class PlanetRepository {
     private static final String URI_PLANET = "https://swapi.dev/api/planets";
@@ -23,5 +24,15 @@ public class PlanetRepository {
             System.err.println(e.getMessage());
         }
         return Collections.emptyList();
+    }
+
+    public Optional<Planet> findById(int id){
+        try {
+            final HttpResponse<String> resp = ApiJsonStringLoader.get(new URI(URI_PLANET+"/"+id));
+            return Optional.of(mapper.readValue(resp.body(), Planet.class));
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return Optional.empty();
     }
 }

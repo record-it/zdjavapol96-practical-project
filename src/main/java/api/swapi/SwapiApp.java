@@ -1,10 +1,12 @@
 package api.swapi;
 
+import api.swapi.model.Planet;
 import api.swapi.repository.PlanetRepository;
 import controller.Menu;
 import controller.MenuItem;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SwapiApp {
@@ -24,7 +26,21 @@ public class SwapiApp {
                         MenuItem.builder()
                                 .label("Wybierz planetę")
                                 .action(()->{
-                                    System.out.println("Wybrana planeta");
+                                    if (scanner.hasNextInt()) {
+                                        int id = scanner.nextInt();
+                                        scanner.nextLine();
+                                        final Optional<Planet> op = planets.findById(id);
+//                                        op.ifPresent(planet ->
+//                                                System.out.println(planet));
+                                        if (op.isPresent()){
+                                            System.out.println(op.get());
+                                        } else {
+                                            System.out.println("Brak takiej planety!");
+                                        }
+                                    } else {
+                                        System.out.println("Błędnie wpisałeś liczbę!");
+                                    }
+
                                 }).build(),
                         MenuItem.builder()
                                 .label("Wyjście")
